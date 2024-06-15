@@ -17,9 +17,18 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
+
+      - name: Install Composer
+        run: |
+          curl -sS https://getcomposer.org/installer | php
+          mv composer.phar /usr/local/bin/composer
           
       - name: Install dependencies
-        run: composer install
+        run: composer install --no-dev --optimize-autoloader  # Instala as dependências do PHP
 
-      - name: Run tests
-        run: ./vendor/bin/phpunit
+      - name: Run tests (opcional)
+        run: ./vendor/bin/phpunit  # Execute seus testes aqui, se aplicável
+
+      - name: Deploy
+        run: |
+          ssh user@server "cd /path/to/your/project && git pull origin main && composer install --no-dev --optimize-autoloader && php artisan migrate --force"
