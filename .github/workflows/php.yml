@@ -11,25 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
       
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
 
-      - name: Install Composer
-        run: |
-          curl -sS https://getcomposer.org/installer | php
-          
-      - name: Install dependencies
-        run: composer install --no-dev --optimize-autoloader  # Instala as dependências do PHP
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader
 
       - name: Install PHPUnit
         run: composer global require phpunit/phpunit
-  
+
       - name: Add Composer's bin directory to PATH
-        run: echo "::add-path::$(composer config --global home)/vendor/bin"
+        run: echo "::add-path::$(composer config --global home)/vendor/bin" >> $GITHUB_ENV
   
       - name: Run PHPUnit tests
         run: phpunit --configuration ./phpunit.xml
