@@ -25,7 +25,7 @@ jobs:
         run: composer global require phpunit/phpunit
 
       - name: Add Composer's bin directory to PATH
-        run: echo "::add-path::$(composer config --global home)/vendor/bin" >> $GITHUB_ENV
+        run: echo "$(composer config --global home)/vendor/bin" >> $GITHUB_PATH
   
       - name: Run PHPUnit tests
         run: phpunit --configuration ./phpunit.xml
