@@ -27,7 +27,7 @@ jobs:
         run: composer install --no-dev --optimize-autoloader  # Instala as dependências do PHP
 
       - name: Run tests (opcional)
-        run: ./vendor/bin/phpunit  # Execute seus testes aqui, se aplicável
+        run: ./phpunit.xml  # Execute seus testes aqui, se aplicável ./vendor/bin/phpunit
 
       - name: Deploy
         run: |
