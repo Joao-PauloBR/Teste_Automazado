@@ -29,7 +29,3 @@ jobs:
   
       - name: Run PHPUnit tests
         run: phpunit --configuration ./phpunit.xml
-
-      - name: Deploy
-        run: |
-          ssh user@server "cd /path/to/your/project && git pull origin main && composer install --no-dev --optimize-autoloader && php artisan migrate --force"
