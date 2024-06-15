@@ -21,11 +21,16 @@ jobs:
       - name: Install Composer
         run: |
           curl -sS https://getcomposer.org/installer | php
-          mv composer.phar /usr/local/bin/composer
           
       - name: Install dependencies
         run: composer install --no-dev --optimize-autoloader  # Instala as dependências do PHP
 
+      - name: Install PHPUnit
+        run: composer global require phpunit/phpunit
+  
+      - name: Add Composer's bin directory to PATH
+        run: echo "::add-path::$(composer config --global home)/vendor/bin"
+  
       - name: Run PHPUnit tests
         run: phpunit --configuration ./phpunit.xml
 
